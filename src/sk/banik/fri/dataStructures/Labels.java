@@ -27,4 +27,5 @@ public class Labels {
 	public static final String propertySheetLabel = "List vlastníctva";
 	public static final String ownerLabel = "Meno Priezvisko";
 	public static final String ownersLabel = "Vlastníci";
+	public static final String propertiesLabel = "Nehnuteľnosti";
 }

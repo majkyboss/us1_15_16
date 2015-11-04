@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -141,7 +142,10 @@ public class MainWin extends JFrame {
 		Property p = new Property();
 		p.setAddress("adresa 1");
 		p.setRegisterNumber(5555);
-		showPanel(guiHelper.generatePropertyView(p));
+//		showPanel(guiHelper.generatePropertyView(p));
+		LinkedList<Property> props = new LinkedList<>();
+		props.add(p);
+		showPanel(guiHelper.generatePropertiesView(props));
 	}
 
 	protected void exportAction() {
