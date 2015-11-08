@@ -1,16 +1,13 @@
 package sk.banik.fri.dataStructures.graphic;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
-
 import sk.banik.fri.dataStructures.Labels;
 import sk.banik.fri.dataStructures.model.Owner;
 import sk.banik.fri.dataStructures.model.Property;
 import sk.banik.fri.dataStructures.model.ShareholdEntry;
+
+import javax.swing.table.AbstractTableModel;
+import java.util.LinkedList;
+import java.util.List;
 
 public class OwnersTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 63887743008325446L;
@@ -70,7 +67,7 @@ public class OwnersTableModel extends AbstractTableModel {
 			Owner o = ownersList.get(rowIndex);
 			switch (columnIndex) {
 			case 0:
-				return o.getFirstName() + o.getLastname();
+				return o.getFirstName() + " " + o.getLastname();
 			case 1:
 				Property residance = o.getResidance();
 				if (residance == null) return null;
@@ -84,7 +81,7 @@ public class OwnersTableModel extends AbstractTableModel {
 
 	@Override
 	public String getColumnName(int column) {
-		String[] names = null;
+		String[] names = new String[]{};
 		if (shareholdings != null) {
 			names = new String[]{Labels.ownerLabel, Labels.address, Labels.shareholding};
 		} else if (ownersList != null) {

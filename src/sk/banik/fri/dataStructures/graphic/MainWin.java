@@ -1,38 +1,27 @@
 package sk.banik.fri.dataStructures.graphic;
 
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.EventQueue;
-import java.awt.HeadlessException;
+import sk.banik.fri.dataStructures.CatasterService;
+import sk.banik.fri.dataStructures.CatasterService.KeyValuePair;
+import sk.banik.fri.dataStructures.CatasterServiceNumbered;
+import sk.banik.fri.dataStructures.Labels;
+import sk.banik.fri.dataStructures.Operations;
+import sk.banik.fri.dataStructures.controll.CSVSupport;
+import sk.banik.fri.dataStructures.controll.ControllerFactory;
+import sk.banik.fri.dataStructures.model.CatastralArea;
+import sk.banik.fri.dataStructures.model.Owner;
+import sk.banik.fri.dataStructures.model.Property;
+import sk.banik.fri.dataStructures.model.PropertySheet;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.swing.GroupLayout;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import sk.banik.fri.dataStructures.CatasterService;
-import sk.banik.fri.dataStructures.CatasterServiceNumbered;
-import sk.banik.fri.dataStructures.Labels;
-import sk.banik.fri.dataStructures.Operations;
-import sk.banik.fri.dataStructures.CatasterService.KeyValuePair;
-import sk.banik.fri.dataStructures.controll.CSVSupport;
-import sk.banik.fri.dataStructures.controll.ControllerFactory;
-import sk.banik.fri.dataStructures.model.Property;
 
 public class MainWin extends JFrame {
 	private static final long serialVersionUID = 4968949784361287814L;
@@ -140,12 +129,47 @@ public class MainWin extends JFrame {
 
 	protected void testAction() {
 		Property p = new Property();
-		p.setAddress("adresa 1");
+		p.setAddress("address 1");
 		p.setRegisterNumber(5555);
+
 //		showPanel(guiHelper.generatePropertyView(p));
-		LinkedList<Property> props = new LinkedList<>();
-		props.add(p);
-		showPanel(guiHelper.generatePropertiesView(props));
+//		LinkedList<Property> props = new LinkedList<>();
+//		props.add(p);
+//		showPanel(guiHelper.generatePropertiesView(props));
+
+		PropertySheet sheet = new PropertySheet();
+		sheet.addProperty(p);
+		Owner o = new Owner();
+		o.setFirstName("Dindi");
+		o.setLastname("Konak");
+		o.setBornNumber("1234568888");
+		o.setResidance(p);
+		sheet.addOwner(o, 1d);
+//		showPanel(guiHelper.generatePropertySheetView(sheet));
+
+		List<PropertySheet> sheets = new LinkedList<>();
+		sheets.add(sheet);
+		sheet = new PropertySheet();
+		p = new Property();
+		p.setAddress("address 2");
+		p.setRegisterNumber(8888);
+		sheet.addProperty(p);
+		o = new Owner();
+		o.setFirstName("Tantal");
+		o.setLastname("Sui");
+		o.setBornNumber("6543218888");
+		sheet.addOwner(o, 1d);
+		sheets.add(sheet);
+//		showPanel(guiHelper.generatePropertySheetsView(sheets));
+
+		LinkedList<CatastralArea> areas = new LinkedList<>();
+		CatastralArea area = new CatastralArea();
+		area.setName("area 1");
+		areas.add(area);
+		area = new CatastralArea();
+		area.setName("area 2");
+		areas.add(area);
+		showPanel(guiHelper.generateCatastralAreasView(areas));
 	}
 
 	protected void exportAction() {

@@ -1,6 +1,6 @@
 package sk.banik.fri.dataStructures.model;
 
-import java.util.LinkedList;
+import java.util.HashSet;
 
 public class Property {
 	private static int regNumCounter = 0;
@@ -8,12 +8,12 @@ public class Property {
 	private int registerNumber;
 	private String address;
 	private PropertySheet propertySheet;
-	private LinkedList<Owner> residents;
+	private HashSet<Owner> residents;
 	private CatastralArea catastralArea;
 	
 	public Property() {
 		registerNumber = regNumCounter++;
-		residents = new LinkedList<Owner>();
+		residents = new HashSet<>();
 	}
 	
 	public int getRegisterNumber() {
@@ -34,10 +34,10 @@ public class Property {
 	public void setPropertySheet(PropertySheet propertySheet) {
 		this.propertySheet = propertySheet;
 	}
-	public LinkedList<Owner> getResidents() {
+	public HashSet<Owner> getResidents() {
 		return residents;
 	}
-	public void setResidents(LinkedList<Owner> residents) {
+	public void setResidents(HashSet<Owner> residents) {
 		this.residents = residents;
 	}
 	public CatastralArea getCatastralArea() {

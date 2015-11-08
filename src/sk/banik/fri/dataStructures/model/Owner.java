@@ -1,17 +1,17 @@
 package sk.banik.fri.dataStructures.model;
 
-import java.util.LinkedList;
+import java.util.HashSet;
 
 public class Owner {
 	
 	private String firstName;
 	private String lastname;
 	private String bornNumber;
-	private LinkedList<Property> ownerOf;
+	private HashSet<Property> ownerOf;
 	private Property residance;
 	
 	public Owner() {
-		ownerOf = new LinkedList<Property>();
+		ownerOf = new HashSet<>();
 	}
 	
 	public String getFirstName() {
@@ -32,10 +32,10 @@ public class Owner {
 	public void setBornNumber(String bornNumber) {
 		this.bornNumber = bornNumber;
 	}
-	public LinkedList<Property> getOwnerOf() {
+	public HashSet<Property> getOwnerOf() {
 		return ownerOf;
 	}
-	public void setOwnerOf(LinkedList<Property> ownerOf) {
+	public void setOwnerOf(HashSet<Property> ownerOf) {
 		this.ownerOf = ownerOf;
 	}
 	public Property getResidance() {

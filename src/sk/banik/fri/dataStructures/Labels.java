@@ -1,7 +1,5 @@
 package sk.banik.fri.dataStructures;
 
-import javax.swing.Icon;
-
 public class Labels {
 	public static final String propertyRegNumber = "Súpisné čislo";
 	public static final String catasterNumber = "Číslo katastrálneho územia";
@@ -28,4 +26,10 @@ public class Labels {
 	public static final String ownerLabel = "Meno Priezvisko";
 	public static final String ownersLabel = "Vlastníci";
 	public static final String propertiesLabel = "Nehnuteľnosti";
+	public static final String propertySheetsLabel = "Listy vlastníctva";
+	public static final String propertiesCount = "Počet nehnuteľností";
+	public static final String ownersCount = "Počet vlastníkov";
+	public static final String residenceLabel = "Trvalý pobyt";
+	public static final String ownersOfLabel = "Vo vlastníctve";
+	public static final String catastersLabel = "Katastrálne územia";
 }
