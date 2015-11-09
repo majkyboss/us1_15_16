@@ -28,7 +28,6 @@ public class MainWin extends JFrame {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-			
 			@Override
 			public void run() {
 				MainWin app = new MainWin();
@@ -777,6 +776,6 @@ public class MainWin extends JFrame {
 
 	public void setController(CatasterService catasterService) {
 		controller = catasterService;
-		if (controller != null ) controller.setView(this);
+//		if (controller != null ) controller.setView(this);
 	}
 }
