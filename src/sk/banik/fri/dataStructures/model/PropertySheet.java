@@ -29,7 +29,7 @@ public class PropertySheet {
 	public void setEntries(LinkedList<PropertyEntry> entries) {
 		this.entries = entries;
 	}
-	
+
 	public void addProperty(Property property){
 		PropertyEntry pEntry = new PropertyEntry();
 		pEntry.property = property;
