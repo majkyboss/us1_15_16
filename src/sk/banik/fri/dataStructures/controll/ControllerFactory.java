@@ -1,5 +1,6 @@
 package sk.banik.fri.dataStructures.controll;
 
+import sk.banik.fri.dataStructures.BasicMapCollection;
 import sk.banik.fri.dataStructures.CatasterService;
 import sk.banik.fri.dataStructures.model.*;
 
@@ -172,7 +173,7 @@ public class ControllerFactory {
 					for (int i = 0; i < pEntry.shareholdings.size(); i++) {
 						if (pEntry.shareholdings.get(i).owner.equals(owner)){
 							pEntry.shareholdings.remove(i);
-							i--;
+//							i--;
 						}
 					}
 				}
@@ -182,23 +183,59 @@ public class ControllerFactory {
 
 		@Override
 		public PropertySheet removePropertySheet(Integer propertySheetNumber, Integer catasterNumber, Integer newPropertySheetNumber, Integer newCatasterNumber) {
-			
-			return null;
+			BasicMapCollection<Integer, PropertySheet> sheets = cataster.getAreasById().find(catasterNumber).getPropertySheets();
+			PropertySheet sheet = sheets.find(propertySheetNumber);
+			PropertySheet newSheet = cataster.getAreasById().find(newCatasterNumber).getPropertySheets().find(newPropertySheetNumber);
+			for (PropertyEntry pEntry : sheet.getEntries()) {
+				newSheet.getEntries().add(pEntry);
+				// add users from removed sheet to new sheet
+				for (ShareholdEntry shEntry : sheet.getShareholdersList()){
+					newSheet.addOwner(shEntry.owner, 0.0);
+					// do not forget to modify shareholding values
+				}
+
+				// add properties from removed sheet to users to new sheet
+				// - add users from newSheet to properties from deleted sheet
+				for (ShareholdEntry shEntry: newSheet.getShareholdersList()) {
+					// in new sheet shareholding will not be assigned - need to add
+					shEntry.shareholding = 0.0;
+					pEntry.shareholdings.add(shEntry);
+				}
+			}
+			return sheets.delete(sheet.getNumber());
 		}
 
 		@Override
 		public Property removeProperty(Integer propertyRegNumber, Integer propertySheetNumber, Integer catasterNumber) {
+			PropertySheet sheet = cataster.getAreasById().find(catasterNumber).getPropertySheets().find(propertySheetNumber);
+			for (Property p : sheet.getPropertiesList()) {
+				if (p.getRegisterNumber() == propertyRegNumber) {
+					sheet.removeProperty(p);
+					return p;
+				}
+			}
+
 			return null;
 		}
 
 		@Override
 		public CatastralArea addCatastralArea(String catasterName) {
-			return null;
+			CatastralArea area = new CatastralArea();
+			area.setName(catasterName);
+			cataster.getAreasById().insert(area.getId(), area);
+			cataster.getAreasByName().insert(area.getName(), area);
+			return area;
 		}
 
 		@Override
 		public CatastralArea deleteCatastralArea(Integer catasterNumber, Integer newCatasterNumber) {
-			return null;
+			CatastralArea area = cataster.getAreasById().find(catasterNumber);
+			CatastralArea newArea = cataster.getAreasById().find(newCatasterNumber);
+			newArea.addAllProperties(area.getProperties());
+			newArea.addAllSheets(area.getPropertySheets());
+			cataster.getAreasById().delete(area.getId());
+			cataster.getAreasByName().delete(area.getName());
+			return area;
 		}
 
 		@Override

@@ -65,6 +65,7 @@ public class PropertySheet {
 
 		for (PropertyEntry pEntry :
 				entries) {
+			// TODO do not add if already contains
 			pEntry.shareholdings.add(shEntry);
 			owner.getOwnerOf().add(pEntry.property);
 		}

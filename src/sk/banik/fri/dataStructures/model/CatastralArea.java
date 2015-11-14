@@ -41,5 +41,17 @@ public class CatastralArea {
 			BasicMapCollection<Integer, PropertySheet> propertySheets) {
 		this.propertySheets = propertySheets;
 	}
-	
+
+	public void addAllProperties(BasicMapCollection<Integer, Property> properties) {
+		for (Property prop : properties.getValues()) {
+			this.properties.insert(prop.getRegisterNumber(), prop);
+			prop.setCatastralArea(this);
+		}
+	}
+
+	public void addAllSheets(BasicMapCollection<Integer, PropertySheet> propertySheets) {
+		for (PropertySheet sheet : propertySheets.getValues()) {
+			this.propertySheets.insert(sheet.getNumber(), sheet);
+		}
+	}
 }
